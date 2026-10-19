@@ -296,7 +296,22 @@ nav.tabs button.on{box-shadow:0 8px 20px -10px rgba(226,196,118,.55),0 1px 0 rgb
 @media print{.hero .shot{animation:none}}
 
 </style>
-</head>
+<style id="sla-sup-css">.g5{grid-template-columns:repeat(5,minmax(0,1fr))}.sla-fil{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px;align-items:flex-end}.sla-fil .fld{min-width:140px;max-width:220px;flex:1 1 140px}.sla-scroll{max-height:560px;overflow:auto;border:1px solid var(--line2);border-radius:14px;padding:4px 6px}.sla-pick{background:var(--teal-bg);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:10px;font-size:12.5px}.sla-pick a{color:var(--teal);font-weight:700;cursor:pointer;margin-inline-start:10px}@media(max-width:1280px){.g5{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.g5{grid-template-columns:1fr}}</style><style id="nav-grp-css">
+.grp-h .gl{flex:1;text-align:right;line-height:1.4}.grp-h .gl-s{display:none}
+.grp-h .chev{width:16px;height:16px;flex:none;opacity:.8;transition:transform .5s var(--ease),opacity .3s}.grp.open .grp-h .chev{transform:rotate(180deg);opacity:1}
+.grp.act:not(.open) .grp-h,.grp.act .grp-h:not(.on){background:rgba(255,255,255,.06);color:#fff}
+.grp-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}.grp.open .grp-sub{grid-template-rows:1fr}
+.grp-in{overflow:hidden;min-height:0;display:grid;gap:3px;margin-inline-start:24px;padding-inline-start:10px;border-inline-start:2px solid rgba(226,196,118,.28)}
+.grp.open .grp-in{padding-top:4px;padding-bottom:2px}
+nav.tabs .sub-b{padding:8px 10px;font-size:12.8px;opacity:0;transform:translateX(18px);transition:opacity .4s ease calc(var(--i)*80ms + 140ms),transform .55s var(--ease) calc(var(--i)*80ms + 140ms),background .25s,color .25s}
+.grp.open .sub-b{opacity:1;transform:none}
+nav.tabs .sub-b:hover{transform:translateX(-4px)}
+nav.tabs .sub-b .ni{width:26px;height:26px;border-radius:8px}nav.tabs .sub-b .ni svg{width:14px;height:14px}
+nav.tabs .sub-b.on:before{right:-12px;top:8px;bottom:8px;width:3px}
+@media(max-width:960px){.grp,.grp-sub,.grp-in{display:contents}nav.tabs .sub-b{opacity:1;transform:none;padding:6px 4px;font-size:10px}.grp-h .chev{display:none}.grp-h .gl-l{display:none}.grp-h .gl-s{display:inline}.grp-h .gl{flex:none;text-align:center}}
+@media(prefers-reduced-motion:reduce){.grp-sub,.grp-h .chev,nav.tabs .sub-b{transition:none}}
+.eff-head h2{margin:0;font-size:20px}.eff-meta{font-size:12.5px;color:var(--mute);margin-top:4px}.eff-pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+</style></head>
 <body>
 <div class="app">
 <aside class="side">
@@ -305,9 +320,11 @@ nav.tabs button.on{box-shadow:0 8px 20px -10px rgba(226,196,118,.55),0 1px 0 rgb
   <nav class="tabs" id="tabs">
     <button data-view="exec" class="on"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>الملخص التنفيذي</button>
     <button data-view="tix"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span>تحليل البلاغات</button>
-    <button data-view="sr"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>تحليل طلبات الخدمة</button>
-    <button data-view="ppm"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>خطة الصيانة والنظافة</button>
-    <button data-view="effect"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 13l2.5 2.5L16 10"/></svg></span>فعالية الصيانة الوقائية</button>
+    <div class="grp" id="grp-ppm"><button data-view="ppm" class="grp-h" aria-expanded="false" aria-controls="grp-sub"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="gl gl-l">تحليل أداء الصيانة الوقائية والنظافة</span><span class="gl gl-s">الأداء والنظافة</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="grp-sub" id="grp-sub"><div class="grp-in">
+        <button data-view="sr" class="sub-b" style="--i:0"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>تحليل طلبات الخدمة</button>
+        <button data-view="effect" class="sub-b" style="--i:1"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 13l2.5 2.5L16 10"/></svg></span>فعالية الصيانة الوقائية</button>
+      </div></div></div>
     <button data-view="fail"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>الأعطال المتكررة</button>
 
 <button data-view="schools"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>المدارس</button>
@@ -1746,6 +1763,119 @@ function vExec(V) {
 }
 
 /* ---------- tickets only ---------- */
+/* ===================== SLA Performance by Supervisor (page: تحليل البلاغات) ===================== */
+const SLAF = { month: '', sup: '', site: '', asg: '', disc: '', prio: '', status: '' }, SLAP = { sup: '', seg: '' };
+const SLA_C = { within: C.green, risk: '#e8b923', breach: C.red };
+const SLA_SEG = { within: 'Within SLA', risk: 'At Risk', breach: 'SLA Breached' };
+const supOf = t => { const s = ST.A.schools.get(t.sk); return (s && s.sup) || ''; };
+/* classification of one ticket against the SLA window (A.S.slaDays): closed → within / breach, open → risk, otherwise not evaluable */
+function slaClass(t, S) {
+  if (t.sg === 'open') return 'risk';
+  if (t.sg !== 'closed' || t.finish == null || t.finish < t.created) return 'na';
+  return (t.finish - t.created) / DAY <= S.slaDays ? 'within' : 'breach';
+}
+const slaBase = V => V.tix.filter(t => t.sg !== 'cancelled' && supOf(t));
+function slaFiltered(V) {
+  const F = SLAF;
+  return slaBase(V).filter(t => (!F.month || dmon(t.created) === F.month) && (!F.sup || supOf(t) === F.sup) && (!F.site || ST.A.schools.get(t.sk).site === F.site) && (!F.asg || (t.assignee || '—') === F.asg)
+    && (!F.disc || t.disc === F.disc) && (!F.prio || t.priority === F.prio) && (!F.status || t.status === F.status));
+}
+function slaTotals(list, S) {
+  const r = { total: list.length, within: 0, risk: 0, breach: 0, na: 0 }; list.forEach(t => r[slaClass(t, S)]++);
+  r.comp = r.within + r.breach ? 100 * r.within / (r.within + r.breach) : null; return r;
+}
+function slaAgg(list, S) {
+  const m = new Map(), ref = ST.A.tixRef || Date.now();
+  for (const t of list) {
+    const k = supOf(t); let r = m.get(k); if (!r) m.set(k, r = { sup: k, total: 0, within: 0, risk: 0, breach: 0, na: 0, days: 0, dn: 0, openOver: 0, schools: new Set() });
+    const c = slaClass(t, S); r.total++; r[c]++; r.schools.add(t.sk);
+    if (c === 'within' || c === 'breach') { r.days += (t.finish - t.created) / DAY; r.dn++; }
+    if (c === 'risk' && (ref - t.created) / DAY > S.slaDays) r.openOver++;
+  }
+  const rows = [...m.values()]; rows.forEach(r => { r.comp = r.within + r.breach ? 100 * r.within / (r.within + r.breach) : null; r.avg = r.dn ? r.days / r.dn : null; });
+  rows.sort((a, b) => (a.comp == null) - (b.comp == null) || (a.comp || 0) - (b.comp || 0) || b.breach - a.breach || a.sup.localeCompare(b.sup, 'ar'));   // lowest compliance first (top of the chart)
+  return rows;
+}
+const P_SLASIDE = { id: 'slaSide', afterDatasetsDraw(ch, a, o) {
+  if (!o || !o.rows) return; const ctx = ch.ctx, ca = ch.chartArea, x0 = ca.right + 16, X = [0, 66, 134], meta = ch.getDatasetMeta(0);
+  ctx.save(); ctx.direction = 'ltr'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.font = '700 10.5px ' + cssv('--f'); ctx.fillStyle = cssv('--mute'); ['Total', 'SLA %', 'Breached'].forEach((t, i) => ctx.fillText(t, x0 + X[i] + (i ? 8 : 0), ca.top - 12));
+  ctx.font = '600 11.5px ' + cssv('--f');
+  o.rows.forEach((r, i) => { const el = meta.data[i]; if (!el) return; const y = el.y, v = [f0(r.total), r.comp == null ? '—' : f1(r.comp) + '%', f0(r.breach)];
+    v.forEach((t, k) => { ctx.fillStyle = k === 1 && r.comp != null ? (r.comp >= 90 ? C.green : r.comp >= 75 ? C.orange : C.red) : (k === 2 && r.breach ? C.red : cssv('--ink')); ctx.fillText(t, x0 + X[k] + (k ? 8 : 0), y); if (k) { ctx.fillStyle = cssv('--line'); ctx.fillRect(x0 + X[k] - 1, y - 8, 1, 16); } }); });
+  ctx.restore(); } };
+function slaSupCfg(rows) {
+  return { type: 'bar', flat: true, plugins: [P_SLASIDE],
+    data: { labels: rows.map(r => r.sup), datasets: Object.keys(SLA_SEG).map(k => ({ label: SLA_SEG[k], seg: k, data: rows.map(r => r[k]), backgroundColor: SLA_C[k], borderWidth: 0, borderSkipped: false, barPercentage: .7, categoryPercentage: .92 })) },
+    options: { indexAxis: 'y', layout: { padding: { right: 214, top: 26, left: 2, bottom: 2 } }, interaction: { mode: 'nearest', intersect: true },
+      scales: { x: { stacked: true, beginAtZero: true, grid: { color: cssv('--line2') }, border: { display: false }, ticks: { precision: 0, font: { size: 11 } } }, y: { stacked: true, grid: { display: false }, ticks: { autoSkip: false, font: { size: 12 } } } },
+      plugins: { slaSide: { rows }, legend: { position: 'top', rtl: false, labels: { boxWidth: 12, boxHeight: 12, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11.5 }, padding: 16 } },
+        tooltip: { rtl: true, textDirection: 'rtl', backgroundColor: 'rgba(5,42,38,.95)', padding: 12, cornerRadius: 10, titleFont: { weight: '700', size: 13 }, boxPadding: 4, displayColors: false,
+          callbacks: { title: it => rows[it[0].dataIndex].sup, label: it => { const r = rows[it.dataIndex];
+            return [`Total Tickets: ${f0(r.total)}`, `Within SLA: ${f0(r.within)}`, `At Risk (مفتوحة): ${f0(r.risk)}${r.openOver ? ' · منها تجاوزت مهلة ' + f0(ST.A.S.slaDays) + ' أيام: ' + f0(r.openOver) : ''}`, `SLA Breached: ${f0(r.breach)}`,
+              `SLA Compliance: ${r.comp == null ? '—' : f1(r.comp) + '%'} (من ${f0(r.within + r.breach)} مغلقة)`, `متوسط زمن الإنجاز: ${r.avg == null ? '—' : f1(r.avg) + ' يوم'}`, `عدد المدارس: ${f0(r.schools.size)}`]; } } } },
+      onHover: (e, els, ch) => { ch.canvas.style.cursor = els.length || (e.x != null && e.x < ch.chartArea.left && e.y > ch.chartArea.top) ? 'pointer' : 'default'; },
+      onClick: (e, els, ch) => {
+        let idx = -1, seg = '';
+        if (els.length) { idx = els[0].index; seg = ch.data.datasets[els[0].datasetIndex].seg; }
+        else if (e.x != null && e.x < ch.chartArea.left && e.y >= ch.chartArea.top && e.y <= ch.chartArea.bottom) idx = Math.round(ch.scales.y.getValueForPixel(e.y));   // click on the supervisor name
+        if (idx < 0 || idx >= rows.length) return;
+        const sup = rows[idx].sup, same = SLAP.sup === sup && SLAP.seg === seg; SLAP.sup = same ? '' : sup; SLAP.seg = same ? '' : seg; slaRefreshTable(); } } };
+}
+function slaOpts(base) {
+  const uniq = (fn, lab) => [...new Set(base.map(fn))].filter(x => x !== '').sort((a, b) => String(a).localeCompare(String(b), 'ar')).map(v => [v, lab ? lab(v) : v]);
+  return { month: [...new Set(base.map(t => dmon(t.created)))].sort().map(k => [k, monLbl(k)]), sup: uniq(supOf), site: uniq(t => ST.A.schools.get(t.sk).site || '', v => CITY_LBL[v] || v), asg: uniq(t => t.assignee || '—'), disc: uniq(t => t.disc), prio: uniq(t => t.priority || ''), status: uniq(t => t.status || '') };
+}
+function slaFilterHTML(base) {
+  const o = slaOpts(base), L = { month: 'الشهر', sup: 'المشرف', site: 'المنطقة', asg: 'المقاول (المكلَّف بالبلاغ)', disc: 'نوع البلاغ', prio: 'الأولوية', status: 'الحالة' };
+  return Object.keys(L).map(k => `<div class="fld"><label>${L[k]}</label><select data-slaf="${k}"><option value="">الكل</option>${o[k].map(([v, l]) => `<option value="${esc(v)}" ${SLAF[k] === v ? 'selected' : ''}>${esc(l.length > 40 ? l.slice(0, 40) + '…' : l)}</option>`).join('')}</select></div>`).join('') + `<button class="btn sm" data-slareset="1" style="align-self:flex-end;margin-bottom:2px">إعادة ضبط</button>`;
+}
+function slaKpiHTML(T) {
+  return kpi('Total Tickets', T.total, 'إجمالي البلاغات' + (T.na ? ` · ${f0(T.na)} مغلقة بلا تاريخ إنجاز صالح` : ''), { c: C.blue })
+    + kpi('Within SLA', T.within, 'مغلقة ضمن المهلة', { c: C.green }) + kpi('At Risk', T.risk, 'مفتوحة · لا تدخل في نسبة الالتزام', { c: '#e8b923' })
+    + kpi('SLA Breached', T.breach, 'مغلقة بعد انتهاء المهلة', { c: C.red }) + kpi('Overall SLA Compliance', T.comp == null ? null : Math.round(T.comp * 10) / 10, 'Within SLA ÷ المغلقة', { c: C.teal, dec: 1, unit: '%' });
+}
+function slaChartBox(rows) {
+  if (!rows.length) return '<div class="empty">لا توجد بلاغات مطابقة للفلاتر الحالية.</div>';
+  return `<div class="sla-scroll"><div style="height:${Math.max(260, rows.length * 38 + 96)}px;min-width:560px"><canvas id="c-sla-sup"></canvas></div></div>`;
+}
+function slaTableHTML(list, S) {
+  let l = list; if (SLAP.sup) l = l.filter(t => supOf(t) === SLAP.sup && (!SLAP.seg || slaClass(t, S) === SLAP.seg));
+  const note = SLAP.sup ? `<div class="sla-pick">المعروض: بلاغات المشرف <b>${esc(SLAP.sup)}</b>${SLAP.seg ? ' · ' + SLA_SEG[SLAP.seg] : ''} <a data-slaclear="1">إلغاء التحديد</a></div>` : '';
+  const chip = t => { const c = slaClass(t, S); return `<span class="chip ${c === 'within' ? 'ok' : c === 'risk' ? 'warn' : c === 'breach' ? 'bad' : 'na'}">${c === 'na' ? 'غير محدد' : SLA_SEG[c]}</span>`; };
+  return note + table('sla-tix', [
+    { h: 'رقم البلاغ', v: t => t.id }, { h: 'المدرسة', v: t => ST.A.schools.get(t.sk).name, w: 1 }, { h: 'المشرف', v: supOf }, { h: 'المنطقة', v: t => CITY_LBL[ST.A.schools.get(t.sk).site] || ST.A.schools.get(t.sk).site || '' },
+    { h: 'المقاول (المكلَّف)', v: t => t.assignee || '—' }, { h: 'نوع البلاغ', v: t => t.disc }, { h: 'الأولوية', v: t => t.priority }, { h: 'الحالة', v: t => t.status },
+    { h: 'تاريخ الإنشاء', v: t => t.created, f: t => esc(dstr(t.created)) }, { h: 'تاريخ الإنجاز', v: t => t.finish, f: t => esc(dstr(t.finish)) },
+    { h: 'الأيام', n: 1, v: t => t.sg === 'closed' && t.finish != null && t.finish >= t.created ? Math.round((t.finish - t.created) / DAY * 10) / 10 : null }, { h: 'نتيجة SLA', v: t => SLA_SEG[slaClass(t, S)] || 'غير محدد', f: chip },
+  ], l, { limit: 30, title: 'sla-supervisor-tickets', sort: { i: 8, d: -1 }, onRow: t => openSchool(t.sk) });
+}
+function slaSupSection(V) {
+  const S = V.A.S, base = slaBase(V), list = slaFiltered(V), rows = slaAgg(list, S), T = slaTotals(list, S), skipped = V.tix.filter(t => t.sg !== 'cancelled' && !supOf(t)).length;
+  if (SLAP.sup && !rows.some(r => r.sup === SLAP.sup)) { SLAP.sup = ''; SLAP.seg = ''; }
+  if (rows.length) q('c-sla-sup', slaSupCfg(rows));
+  return `<div class="card" id="sla-sup" style="margin-top:16px"><h3>SLA Performance by Supervisor</h3>
+    <div class="sub">أداء الالتزام بمستوى الخدمة لكل مشرف · مهلة SLA = ${f0(S.slaDays)} أيام (من «البيانات والإعدادات») · الملغاة مستبعدة${skipped ? ` · ${f0(skipped)} بلاغ بلا مشرف مسجّل مستبعد` : ''} · بجوار كل شريط: Total Tickets | SLA Compliance % | Breached Tickets</div>
+    <div class="sla-fil" id="sla-fil">${slaFilterHTML(base)}</div>
+    <div class="grid g5" id="sla-kpis">${slaKpiHTML(T)}</div>
+    <div id="sla-chart" style="margin-top:14px">${slaChartBox(rows)}</div>
+    <div id="sla-tbl" style="margin-top:14px">${slaTableHTML(list, S)}</div></div>`;
+}
+function slaRefresh() {
+  const root = $('#sla-sup'); if (!root || !ST.V) return; const V = ST.V, S = V.A.S, list = slaFiltered(V), rows = slaAgg(list, S);
+  if (SLAP.sup && !rows.some(r => r.sup === SLAP.sup)) { SLAP.sup = ''; SLAP.seg = ''; }
+  $('#sla-fil').innerHTML = slaFilterHTML(slaBase(V)); $('#sla-kpis').innerHTML = slaKpiHTML(slaTotals(list, S)); $('#sla-chart').innerHTML = slaChartBox(rows);
+  if (CH['c-sla-sup']) { CH['c-sla-sup'].destroy(); delete CH['c-sla-sup']; }
+  if (rows.length) chart('c-sla-sup', slaSupCfg(rows));
+  slaRefreshTable(); animateIn(root);
+}
+function slaRefreshTable() { const root = $('#sla-sup'); if (!root || !ST.V) return; $('#sla-tbl').innerHTML = slaTableHTML(slaFiltered(ST.V), ST.V.A.S); }
+document.addEventListener('change', e => { const s = e.target.closest && e.target.closest('select[data-slaf]'); if (s) { SLAF[s.dataset.slaf] = s.value; slaRefresh(); } });
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-slareset]')) { Object.keys(SLAF).forEach(k => SLAF[k] = ''); SLAP.sup = ''; SLAP.seg = ''; slaRefresh(); }
+  if (e.target.closest('[data-slaclear]')) { SLAP.sup = ''; SLAP.seg = ''; slaRefreshTable(); }
+});
+
 function vTix(V) {
   const A = V.A, T = V.tx;
   if (!hasData('tix')) return needData('tix', 'البلاغات (ملف الدعم الموحد)');
@@ -1760,6 +1890,7 @@ function vTix(V) {
     ${kpi('أُعيد فتحها', T.reopen, T.effective ? fp(pct(T.reopen, T.effective)) : '', { c: C.gold })}
     ${kpi('بلاغات لكل مدرسة', V.sm.length ? Math.round(T.effective / V.sm.length * 100) / 100 : null, `${f0(V.sm.filter(m => m.tn > 0).length)} مدرسة لديها بلاغات`, { c: C.brand, dec: 2 })}
   </div>`;
+  h += slaSupSection(V);
   const M = seriesMonthly(V);
   h += `<div class="grid g21">
     ${card('الاتجاه الشهري: الجديد والمُنجز والمتراكم', 'يوضح هل تتراكم البلاغات أم تُستنزف', M ? cv('c-t-trend', 'tall') : '')}
@@ -2064,6 +2195,84 @@ function noEval(msg) { return `<div class="empty">${msg || 'غير متاح بع
 const scoreChip = s => { const r = rating(s); return `<span class="chip ${r.c}">${s == null ? 'غير متاح' : f1(s)} · ${r.t}</span>`; };
 
 /* ---------- فعالية الصيانة الوقائية ---------- */
+/* ===================== فعالية الصيانة الوقائية: مقارنة الصيانة الوقائية بالبلاغات لكل مدرسة ===================== */
+const EFFS = { school: '' };
+const EFF_C = { before: '#5f8a99', after: C.red, none: '#b9c6c2', planned: C.orange };
+const EFF_LBL = { before: 'بلاغ قبل الصيانة', after: 'بلاغ بعد الصيانة', none: 'بلاغ بلا صيانة منجزة' };
+/* موقع كل بلاغ من الصيانة الوقائية المنجزة (COMP/CLOSE) لنفس المدرسة ونفس التخصص: قبل أول إنجاز / بعده / لا توجد صيانة منجزة */
+function effRelFn(wos) {
+  const first = {};
+  for (const w of wos) if (w.completed && !w.cancelled && w.completeDT != null) first[w.cat] = first[w.cat] == null ? w.completeDT : Math.min(first[w.cat], w.completeDT);
+  return t => { const f = first[t.disc]; return f == null ? 'none' : (floorDay(t.created) >= floorDay(f) ? 'after' : 'before'); };
+}
+function effCounts(wos, tix) {
+  const rel = effRelFn(wos), c = { before: 0, after: 0, none: 0 }; tix.forEach(t => { if (t.sg !== 'cancelled') c[rel(t)]++; });
+  return { done: wos.filter(w => w.completed && !w.cancelled).length, planned: wos.filter(w => !w.completed && !w.cancelled).length, total: c.before + c.after + c.none, ...c };
+}
+function effPickDefault(V) {
+  if (EFFS.school && V.sm.some(m => m.key === EFFS.school)) return EFFS.school;
+  if (V.F.school && V.sm.some(m => m.key === V.F.school)) return V.F.school;
+  let best = null, bs = -1; for (const m of V.sm) { const c = effCounts(m.wos, m.tix), s = (c.done ? 1e4 : 0) + c.after * 100 + c.total; if (s > bs) { bs = s; best = m.key; } }
+  return best || '';
+}
+function effTimelineCfg(x) {
+  const rel = effRelFn(x.wos), cats = DISC_NAMES.filter(d => x.wos.some(w => w.cat === d && !w.cancelled) || x.tix.some(t => t.disc === d && t.sg !== 'cancelled'));
+  const yi = d => cats.indexOf(d), jit = s => ((hashCode(s) % 7) - 3) * 0.055, done = [], plan = [], tb = { before: [], after: [], none: [] };
+  x.wos.forEach(w => { if (w.cancelled) return; if (w.completed && w.completeDT != null) done.push({ x: w.completeDT, y: yi(w.cat), l: 'صيانة وقائية منجزة · ' + w.wo }); else if (w.target != null) plan.push({ x: w.target, y: yi(w.cat), l: 'صيانة وقائية مخططة (غير منجزة) · ' + w.wo + ' · ' + (w.status || '') }); });
+  x.tix.forEach(t => { if (t.sg === 'cancelled') return; const k = rel(t); tb[k].push({ x: t.created, y: yi(t.disc) + jit(t.id), l: EFF_LBL[k] + ' · ' + t.id + ' · ' + (t.issue || '').slice(0, 70) }); });
+  const ds = (label, data, color, o = {}) => Object.assign({ label, data, backgroundColor: color, borderColor: color, pointRadius: 5, pointHoverRadius: 8 }, o);
+  return { type: 'scatter', flat: true, data: { datasets: [
+    ds('صيانة وقائية منجزة', done, C.green, { pointStyle: 'triangle', pointRadius: 10, pointHoverRadius: 12 }), ds('صيانة وقائية مخططة', plan, '#ffffff', { pointStyle: 'triangle', pointRadius: 9, borderColor: C.orange, borderWidth: 2.2 }),
+    ds(EFF_LBL.before, tb.before, EFF_C.before), ds(EFF_LBL.after, tb.after, EFF_C.after, { pointRadius: 6.5 }), ds(EFF_LBL.none, tb.none, EFF_C.none, { pointRadius: 4 })] },
+    options: { layout: { padding: { top: 8, right: 14, bottom: 4 } }, interaction: { mode: 'nearest', intersect: true }, scales: {
+      x: { type: 'linear', ticks: { callback: v => dstr(v), maxTicksLimit: 8, font: { size: 11 } }, grid: { color: cssv('--line2') } },
+      y: { min: -.6, max: Math.max(cats.length - .4, .6), ticks: { stepSize: 1, callback: v => Number.isInteger(v) && cats[v] ? cats[v] : '', font: { size: 12 } }, grid: { color: cssv('--line2') } } },
+      plugins: { legend: { position: 'bottom', rtl: true, labels: { usePointStyle: true, boxWidth: 10, font: { size: 11.5 }, padding: 14 } }, tooltip: { rtl: true, textDirection: 'rtl', backgroundColor: 'rgba(5,42,38,.95)', padding: 11, cornerRadius: 10, displayColors: false, callbacks: { title: it => dstr(it[0].raw.x), label: it => it.raw.l } } } } };
+}
+function effSchoolBody(V, key) {
+  const x = V.sm.find(m => m.key === key); if (!x) return '<div class="empty">اختر مدرسة من القائمة لعرض المقارنة.</div>';
+  const sc = x.sc, rel = effRelFn(x.wos), C0 = effCounts(x.wos, x.tix), cats = DISC_NAMES.filter(d => x.wos.some(w => w.cat === d && !w.cancelled) || x.tix.some(t => t.disc === d && t.sg !== 'cancelled'));
+  const rows = cats.map(d => { const w = x.wos.filter(v => v.cat === d), t = x.tix.filter(v => v.disc === d), c = effCounts(w, t), dn = w.filter(v => v.completed && !v.cancelled && v.completeDT != null);
+    return { d, ...c, last: dn.length ? Math.max(...dn.map(v => v.completeDT)) : null, e: effAgg(w) }; });
+  const tl = x.tix.filter(t => t.sg !== 'cancelled'), hasAny = x.wos.length || tl.length;
+  if (!hasAny) return '<div class="empty">لا توجد أوامر صيانة وقائية ولا بلاغات لهذه المدرسة ضمن التصفية الحالية.</div>';
+  const first = {}; x.wos.forEach(w => { if (w.completed && !w.cancelled && w.completeDT != null) first[w.cat] = first[w.cat] == null ? w.completeDT : Math.min(first[w.cat], w.completeDT); });
+  const chip = k => `<span class="chip ${k === 'after' ? 'bad' : k === 'before' ? 'good' : 'na'}">${k === 'after' ? 'بعد الصيانة' : k === 'before' ? 'قبل الصيانة' : 'بلا صيانة منجزة'}</span>`;
+  const h = `<div class="eff-head"><div><h2 dir="auto">${esc(sc.name)}</h2><div class="eff-meta">${esc(CITY_LBL[sc.site] || sc.city || '')} · ${esc(secName(sc.sector))} · المهندس: ${esc(sc.eng || '—')} · المشرف: ${esc(sc.sup || '—')} · <span dir="ltr">${esc(sc.no || '')}</span></div></div></div>
+    <div class="grid g4" style="margin-top:12px">${kpi('صيانة وقائية منجزة', C0.done, `${f0(C0.planned)} مخططة غير منجزة`, { c: C.green })}${kpi('بلاغات قبل الصيانة', C0.before, 'قبل أول إنجاز في نفس التخصص', { c: EFF_C.before })}${kpi('بلاغات بعد الصيانة', C0.after, 'بعد إنجاز الصيانة في نفس التخصص', { c: C.red })}${kpi('بلاغات بلا صيانة منجزة', C0.none, `من ${f0(C0.total)} بلاغ للمدرسة`, { c: C.gray })}</div>
+    <div class="card" style="margin-top:14px"><h3>الخط الزمني</h3><div class="sub">▲ صيانة وقائية منجزة · △ مخططة · ● بلاغ (الأحمر = بعد الصيانة، الأزرق الرمادي = قبل الصيانة، الفاتح = تخصص بلا صيانة منجزة)</div><div class="cv tall"><canvas id="c-eff-tl"></canvas></div></div>
+    <div class="card" style="margin-top:14px"><h3>حسب التخصص</h3>${table('eff-d', [
+      { h: 'التخصص', v: r => r.d, f: r => `<span style="color:${DISC[r.d].color}">●</span> ${esc(r.d)}` }, { h: 'صيانة منجزة', n: 1, v: r => r.done }, { h: 'آخر إنجاز', v: r => r.last, f: r => esc(dstr(r.last)) },
+      { h: 'بلاغات قبل الصيانة', n: 1, v: r => r.before }, { h: 'بلاغات بعد الصيانة', n: 1, v: r => r.after }, { h: 'بلا صيانة منجزة', n: 1, v: r => r.none }, { h: 'كل البلاغات', n: 1, v: r => r.total },
+      { h: 'الدرجة', n: 1, v: r => r.e.score == null ? null : Math.round(r.e.score * 10) / 10, f: r => r.e.score == null ? '<span class="chip na">—</span>' : scoreChip(r.e.score) }], rows, { limit: 12, title: 'school-disciplines' })}</div>
+    <div class="card" style="margin-top:14px"><h3>بلاغات المدرسة وموقعها من الصيانة الوقائية</h3>${table('eff-t', [
+      { h: 'رقم البلاغ', v: t => t.id }, { h: 'التخصص', v: t => t.disc }, { h: 'تاريخ البلاغ', v: t => t.created, f: t => esc(dstr(t.created)) }, { h: 'الموقع من الصيانة', v: t => rel(t), f: t => chip(rel(t)) },
+      { h: 'الفارق عن أول إنجاز (يوم)', n: 1, v: t => first[t.disc] == null ? null : Math.round((floorDay(t.created) - floorDay(first[t.disc])) / DAY) }, { h: 'الحالة', v: t => t.status }, { h: 'الوصف', v: t => t.issue, w: 1 }], tl, { limit: 15, title: 'school-tickets-vs-ppm', sort: { i: 2, d: -1 } })}</div>`;
+  return h;
+}
+function effCompareSection(V) {
+  const key = EFFS.school = effPickDefault(V), x = V.sm.find(m => m.key === key);
+  const list = V.sm.map(m => ({ key: m.key, m, ...effCounts(m.wos, m.tix) })).filter(r => r.done || r.total);
+  const body = effSchoolBody(V, key); if (x) q('c-eff-tl', effTimelineCfg(x));
+  return `<div class="card" id="eff-sel" style="margin-top:16px"><h3>مقارنة الصيانة الوقائية بالبلاغات حسب المدرسة</h3>
+    <div class="sub">اختر مدرسة لمعرفة البلاغات التي وصلت قبل الصيانة الوقائية وبعدها، حسب التخصص ومكانها على الخط الزمني</div>
+    <div class="eff-pick"><div class="fld" style="max-width:420px;flex:1 1 300px"><label>المدرسة</label><input id="eff-pick" list="schoolList" value="${esc(x ? x.name : '')}" placeholder="ابحث عن مدرسة…" autocomplete="off"></div></div>
+    <div class="sub" style="margin:8px 0 6px">أو اختر من القائمة (اضغط على صف):</div>
+    ${table('eff-sch', [{ h: 'المدرسة', v: r => r.m.name, f: r => `<span dir="auto"><b>${esc(r.m.name)}</b></span>`, w: 1 }, { h: 'القطاع', v: r => secShort(r.m.sector) }, { h: 'صيانة منجزة', n: 1, v: r => r.done },
+      { h: 'بلاغات قبل الصيانة', n: 1, v: r => r.before }, { h: 'بلاغات بعد الصيانة', n: 1, v: r => r.after }, { h: 'بلا صيانة منجزة', n: 1, v: r => r.none }, { h: 'كل البلاغات', n: 1, v: r => r.total }], list,
+      { limit: 8, title: 'eff-schools', sort: { i: 6, d: -1 }, onRow: r => { EFFS.school = r.key; effRefresh(true); } })}
+    </div><div id="eff-body" style="margin-top:6px">${body}</div>`;
+}
+function effRefresh(scroll) {
+  const V = ST.V, b = document.getElementById('eff-body'); if (!V || !b) return; const key = EFFS.school, x = V.sm.find(m => m.key === key);
+  b.innerHTML = effSchoolBody(V, key); const inp = document.getElementById('eff-pick'); if (inp && x) inp.value = x.name;
+  if (CH['c-eff-tl']) { CH['c-eff-tl'].destroy(); delete CH['c-eff-tl']; } if (x && document.getElementById('c-eff-tl')) chart('c-eff-tl', effTimelineCfg(x));
+  animateIn(b); if (scroll) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('change', e => {
+  const i = e.target.closest && e.target.closest('#eff-pick'); if (!i || !ST.V) return; const m = ST.V.sm.find(s => s.name === i.value.trim()); if (m) { EFFS.school = m.key; effRefresh(false); } else toast('لا توجد مدرسة بهذا الاسم ضمن التصفية الحالية.');
+});
+
 function vEffect(V) {
   const A = V.A, E = V.eff;
   if (!hasData('ppm') || !hasData('tix')) return emptyBox('فعالية الصيانة الوقائية تحتاج ملف الصيانة الوقائية وملف البلاغات معاً', 'حمّل الملفين ليُقاس أثر كل زيارة وقائية على البلاغات اللاحقة.');
@@ -2075,6 +2284,7 @@ function vEffect(V) {
     ${kpi('أعطال تكررت بعد الصيانة', E.evaluable ? E.relTickets : null, E.evaluable ? `في ${f0(E.recurring)} زيارة من ${f0(E.evaluable)}` : 'لا توجد بيانات كافية بعد', { c: C.red })}
     ${kpi('زيارات جرى تقييمها', E.evaluable, `من ${f0(E.completed)} منجزة`, { c: C.blue })}
   </div>`;
+  h += effCompareSection(V);
   h += `<div class="grid g3"><div class="card"><h3>درجة الفعالية</h3><div class="sub">${f0(E.evaluable)} زيارة تم تقييمها من ${f0(E.completed)} منجزة</div>${gauge(E.score)}</div>
     <div class="card" style="grid-column:span 2"><h3>كيف تُحسب الدرجة؟</h3><div class="sub">ببساطة</div>
     <ul style="margin:4px 0 0;padding-inline-start:20px;line-height:2">
@@ -2226,7 +2436,7 @@ const VIEWS = { exec: vExec, tix: vTix, sr: vSR, ppm: vPPM, effect: vEffect, fai
 const VMETA = {
   exec: ['الملخص التنفيذي', 'EXECUTIVE SUMMARY', 'نظرة واحدة على الصيانة الوقائية والبلاغات وطلبات الخدمة في القطاعات الثلاثة'],
   tix: ['تحليل البلاغات', 'TICKETS ANALYSIS', 'بلاغات الدعم الموحد فقط: الحجم والاتجاه والتخصصات وأعمار البلاغات المفتوحة'],
-  ppm: ['مؤشرات الصيانة الوقائية والنظافة العميقة', 'PREVENTIVE MAINTENANCE & DEEP CLEANING', 'هل تُنفَّذ الصيانة الوقائية والنظافة العميقة وفق الخطة؟ منحنيات S والتأخر والمقاولون'],
+  ppm: ['تحليل أداء الصيانة الوقائية والنظافة', 'PREVENTIVE MAINTENANCE & CLEANING PERFORMANCE', 'هل تُنفَّذ الصيانة الوقائية والنظافة العميقة وفق الخطة؟ منحنيات S والتأخر والمقاولون'],
   effect: ['فعالية الصيانة الوقائية', 'PREVENTIVE MAINTENANCE EFFECTIVENESS', 'هل تمنع الصيانة الوقائية الأعطال؟ قياس البلاغات التي تصل بعد كل زيارة وقائية في نفس المدرسة والتخصص'],
   fail: ['الأعطال المتكررة', 'RECURRING FAILURES', 'البلاغات التي تتكرر لنفس المدرسة ونفس نوع العطل، وأنواع الأعطال بعد الصيانة الوقائية'],
   sr: ['تحليل طلبات الخدمة', 'SERVICE REQUESTS ANALYSIS', 'طلبات الخدمة المرفوعة على Maximo: الشدة والأسباب الجذرية والاتجاه'],
@@ -2321,6 +2531,20 @@ function exportXlsx() {
   sh('وقائية متأخرة', [['أمر العمل', 'المدرسة', 'القطاع', 'التخصص', 'الحالة', 'الموعد'], ...V.wos.filter(w => w.overdue).map(w => [w.wo, A.schools.get(w.sk).name, secShort(w.sector), w.cat, w.status, dstr(w.target)])]);
   XLSX.writeFile(wb, 'تقرير-الصيانة-المتكامل-' + new Date().toISOString().slice(0, 10) + '.xlsx');
 }
+
+/* ===================== قائمة جانبية متدرجة: تحليل أداء الصيانة الوقائية والنظافة ← (تحليل طلبات الخدمة · فعالية الصيانة الوقائية) ===================== */
+const NAV_GRP = { views: ['ppm', 'sr', 'effect'], open: false };
+function syncNavGroup() {
+  const g = document.getElementById('grp-ppm'); if (!g) return;
+  const inGrp = NAV_GRP.views.includes(ST.view); if (!inGrp) NAV_GRP.open = false;
+  g.classList.toggle('open', NAV_GRP.open); g.classList.toggle('act', inGrp);
+  const h = g.querySelector('.grp-h'); if (h) h.setAttribute('aria-expanded', NAV_GRP.open ? 'true' : 'false');
+}
+document.addEventListener('click', e => {   // runs before the main handler: decide open / close from the state before navigation
+  const h = e.target.closest && e.target.closest('.grp-h'); if (!h) return;
+  NAV_GRP.open = ST.view === 'ppm' ? !NAV_GRP.open : true;
+}, true);
+(function () { const r0 = render; render = function () { const out = r0.apply(this, arguments); try { syncNavGroup(); } catch (e) { } return out; }; })();
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
