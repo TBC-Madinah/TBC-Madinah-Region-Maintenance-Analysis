@@ -310,7 +310,7 @@ nav.tabs .sub-b .ni{width:26px;height:26px;border-radius:8px}nav.tabs .sub-b .ni
 nav.tabs .sub-b.on:before{right:-12px;top:8px;bottom:8px;width:3px}
 @media(max-width:960px){.grp,.grp-sub,.grp-in{display:contents}nav.tabs .sub-b{opacity:1;transform:none;padding:6px 4px;font-size:10px}.grp-h .chev{display:none}.grp-h .gl-l{display:none}.grp-h .gl-s{display:inline}.grp-h .gl{flex:none;text-align:center}}
 @media(prefers-reduced-motion:reduce){.grp-sub,.grp-h .chev,nav.tabs .sub-b{transition:none}}
-.eff-head h2{margin:0;font-size:20px}.eff-meta{font-size:12.5px;color:var(--mute);margin-top:4px}.eff-pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.v-fines .hero,.v-fines .filters,.v-fines #crumb{display:none!important}.fines-wrap iframe{width:100%;height:calc(100vh - 96px);min-height:560px;border:0;border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.eff-head h2{margin:0;font-size:20px}.eff-meta{font-size:12.5px;color:var(--mute);margin-top:4px}.eff-pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 </style></head>
 <body>
 <div class="app">
@@ -328,6 +328,7 @@ nav.tabs .sub-b.on:before{right:-12px;top:8px;bottom:8px;width:3px}
     <button data-view="fail"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>الأعطال المتكررة</button>
 
 <button data-view="schools"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>المدارس</button>
+    <button data-view="fines"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.8 0 2.5 5 1.3 5 3.9 0 1.1-1.1 1.9-2.5 1.9-1.1 0-2.1-.5-2.6-1.4M12 6.5V8m0 8v1.5"/></svg></span>منصة الغرامات التعاقدية</button>
     <button data-view="data"><span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>البيانات والإعدادات</button>
   </nav>
   <div class="side-foot">تُنفَّذ الحسابات بالكامل داخل المتصفح.<br>Powered by TBC</div>
@@ -2432,7 +2433,7 @@ function openReport() {
 function closeReport() { $('#report').classList.remove('on'); document.body.classList.remove('rep-open'); RQ.forEach(([id]) => { if (CH[id]) { CH[id].destroy(); delete CH[id]; } }); }
 
 /* ===================== SHELL: navigation, filters, render, modals, boot ===================== */
-const VIEWS = { exec: vExec, tix: vTix, sr: vSR, ppm: vPPM, effect: vEffect, fail: vFail, schools: vSchools, data: V => ST.dataOK ? vData(V) : lockedHTML() };
+const VIEWS = { exec: vExec, tix: vTix, sr: vSR, ppm: vPPM, effect: vEffect, fail: vFail, schools: vSchools, data: V => ST.dataOK ? vData(V) : lockedHTML(), fines: vFines };
 const VMETA = {
   exec: ['الملخص التنفيذي', 'EXECUTIVE SUMMARY', 'نظرة واحدة على الصيانة الوقائية والبلاغات وطلبات الخدمة في القطاعات الثلاثة'],
   tix: ['تحليل البلاغات', 'TICKETS ANALYSIS', 'بلاغات الدعم الموحد فقط: الحجم والاتجاه والتخصصات وأعمار البلاغات المفتوحة'],
@@ -2442,6 +2443,7 @@ const VMETA = {
   sr: ['تحليل طلبات الخدمة', 'SERVICE REQUESTS ANALYSIS', 'طلبات الخدمة المرفوعة على Maximo: الشدة والأسباب الجذرية والاتجاه'],
   
   schools: ['المدارس', 'SCHOOLS', 'مؤشرات كل مدرسة وملفها التفصيلي'],
+  fines: ['منصة الغرامات التعاقدية', 'CONTRACT PENALTIES', 'رصد الغرامات التعاقدية والمخالفات والقطاعات والأسباب والاتجاه والتدقيق'],
   data: ['البيانات والإعدادات', 'DATA & SETTINGS', 'الملفات المحمّلة وجودة المطابقة وإعدادات الاحتساب'],
 };
 function animateIn(root) {
@@ -2534,7 +2536,9 @@ function exportXlsx() {
 
 /* ===================== قائمة جانبية متدرجة: تحليل أداء الصيانة الوقائية والنظافة ← (تحليل طلبات الخدمة · فعالية الصيانة الوقائية) ===================== */
 const NAV_GRP = { views: ['ppm', 'sr', 'effect'], open: false };
+function vFines() { return '<div class="fines-wrap"><iframe id="fines-frame" title="منصة الغرامات التعاقدية" src="fines.html" allow="clipboard-write"></iframe></div>'; }
 function syncNavGroup() {
+  document.body.classList.toggle('v-fines', ST.view === 'fines');
   const g = document.getElementById('grp-ppm'); if (!g) return;
   const inGrp = NAV_GRP.views.includes(ST.view); if (!inGrp) NAV_GRP.open = false;
   g.classList.toggle('open', NAV_GRP.open); g.classList.toggle('act', inGrp);
